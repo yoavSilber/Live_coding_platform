@@ -8,7 +8,10 @@ import "./CodeBlockPage.css";
 import { Link } from "react-router-dom";
 
 // Initialize socket connection
-const socket = io("http://localhost:5000");
+const socket = io({
+  path: "/socket.io", // default, but you can change this on the server
+  transports: ["websocket"], // optional, force WebSocket only
+});
 
 function CodeBlockPage() {
   const { id } = useParams();
