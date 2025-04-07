@@ -9,7 +9,7 @@ function Lobby() {
 
   useEffect(() => {
     // Fetch code blocks from the server
-    fetch("http://localhost:5000/api/code-blocks")
+    fetch("/api/code-blocks")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

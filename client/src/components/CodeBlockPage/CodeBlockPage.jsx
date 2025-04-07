@@ -24,7 +24,7 @@ function CodeBlockPage() {
 
   useEffect(() => {
     // Fetch the code block details
-    fetch(`http://localhost:5000/api/code-blocks/${id}`)
+    fetch(`/api/code-blocks/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Code block not found");
