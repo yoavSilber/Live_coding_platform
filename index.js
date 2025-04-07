@@ -25,7 +25,7 @@ app.use(cors()); // Enable CORS for all routes.
 app.use(express.json()); // Parse incoming JSON requests.
 
 // Serve static files from the client dist directory
-app.use(express.static(path.join(__dirname, "../client/dist"))); // Serve React app's static files
+app.use(express.static(path.join(__dirname, "./client/dist"))); // Serve React app's static files
 
 // Connect to MongoDB
 mongoose
@@ -86,7 +86,7 @@ initializeDatabase();
 
 // Explicitly handle the root route
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.resolve(__dirname, "./client/dist/index.html"));
 });
 
 // Route to get a list of all code blocks (only their names)
