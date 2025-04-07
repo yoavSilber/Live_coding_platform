@@ -5,7 +5,7 @@ const cors = require("cors"); // CORS middleware allows cross-origin requests.
 const http = require("http"); // HTTP module to create a server.
 const socketIo = require("socket.io"); // Socket.IO enables real-time, bidirectional communication.
 const path = require("path"); // Path module for working with file paths.
-
+require("dotenv").config(); // Load environment variables from .env file.
 // Create an Express application
 const app = express();
 
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, "./client/dist"))); // Serve React a
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/codeCollab")
+  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/codeblocks")
   .then(async () => {
     console.log("Connected to MongoDB");
   }) // Log success message on connection.
