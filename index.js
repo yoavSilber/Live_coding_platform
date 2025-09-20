@@ -21,9 +21,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "./client/dist")));
 
 mongoose
-  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/codeblocks")
+  .connect("mongodb://localhost:27017/codeblocks") // Always use local MongoDB
   .then(async () => {
-    console.log("Connected to MongoDB");
+    console.log("Connected to local MongoDB");
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -176,7 +176,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+const PORT = 3001; // Always run locally on port 3001
+server.listen(PORT, "localhost", () => {
+  console.log(`Server running locally on http://localhost:${PORT}`);
 });
