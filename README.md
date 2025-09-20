@@ -190,18 +190,4 @@ The platform comes pre-loaded with JavaScript exercises:
 - Session recording and playback
 - Advanced mentor tools and analytics
 
-## 👨‍💻 Developer
-
-**Yoav Silber**
-
-- Experienced full-stack developer
-- Passionate about educational technology
-- Skilled in real-time web applications and collaborative tools
-
-## 📄 License
-
-This project is available for educational and portfolio purposes.
-
 ---
-
-_Built with ❤️ for the programming education community_
