@@ -114,7 +114,10 @@ io.on("connection", (socket) => {
         students: [],
         currentCode: "",
       };
-    } else if (!rooms[roomId].students.includes(socket.id) && socket.id !== rooms[roomId].mentor) {
+    } else if (
+      !rooms[roomId].students.includes(socket.id) &&
+      socket.id !== rooms[roomId].mentor
+    ) {
       rooms[roomId].students.push(socket.id);
     }
 
@@ -139,7 +142,12 @@ io.on("connection", (socket) => {
       const codeBlockId = roomId;
       const codeBlock = await CodeBlock.findById(codeBlockId);
       function safeUnescape(str) {
-        return str.replace(/\\n/g, "\n").replace(/\\r/g, "\r").replace(/\\t/g, "\t").replace(/\\"/g, '"').replace(/\\\\/g, "\\");
+        return str
+          .replace(/\\n/g, "\n")
+          .replace(/\\r/g, "\r")
+          .replace(/\\t/g, "\t")
+          .replace(/\\"/g, '"')
+          .replace(/\\\\/g, "\\");
       }
 
       function normalizeCode(str) {
@@ -150,7 +158,10 @@ io.on("connection", (socket) => {
           .filter((line) => line.length > 0)
           .join("\n");
       }
-      if (codeBlock && normalizeCode(code) === normalizeCode(codeBlock.solution)) {
+      if (
+        codeBlock &&
+        normalizeCode(code) === normalizeCode(codeBlock.solution)
+      ) {
         socket.emit("solution-correct", true);
       }
     } catch (error) {
@@ -166,7 +177,9 @@ io.on("connection", (socket) => {
         io.to(roomId).emit("mentor-left");
         delete rooms[roomId];
       } else if (rooms[roomId].students.includes(socket.id)) {
-        rooms[roomId].students = rooms[roomId].students.filter((id) => id !== socket.id);
+        rooms[roomId].students = rooms[roomId].students.filter(
+          (id) => id !== socket.id
+        );
 
         io.to(roomId).emit("room-info", {
           studentCount: rooms[roomId].students.length,

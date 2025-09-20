@@ -1,65 +1,45 @@
-# 🎓 Live Coding PlatformTom is a professional JS lecturer who loves his students very much.
+# Live Coding Platform
 
-Unfortunately, Tom had to move to Thailand with his wife.
+A real-time collaborative coding platform designed for programming education, enabling mentors and students to interact in live coding sessions with instant feedback and solution validation.
 
-A real-time collaborative coding platform designed for programming education, enabling mentors and students to interact in live coding sessions with instant feedback and solution validation.Tom wants to keep following his students' progress in their journey of becoming a JS master just like him!
+## Project Overview
 
-## 🌟 Project OverviewHelp Tom create an online coding web application with the following pages and features:
+This full-stack web application creates an interactive learning environment where programming instructors can guide students through coding exercises in real-time. The platform supports multiple concurrent coding sessions with automatic role assignment, live code synchronization, and instant solution validation.
 
-Lobby page (no need for authentication) :
+## Key Features
 
-This full-stack web application creates an interactive learning environment where programming instructors can guide students through coding exercises in real-time. The platform supports multiple concurrent coding sessions with automatic role assignment, live code synchronization, and instant solution validation.The page should contain the title “Choose code block” and a list of at least 4 items that represent code blocks, each item can be represented by a name (for example - “Async case”)
+### **Lobby System**
+- Clean, intuitive interface displaying available coding challenges
+- Dynamic code block selection with instant navigation
+- Responsive design for seamless user experience
 
-Clicking on an item should redirect users to the corresponding code block page -
-
-## ✨ Key FeaturesCode block page :
-
-Contains the title and a text editor with the code block initial template and a role indicator (student/mentor).
-
-### 🏠 **Lobby System**Assume that the first user who opens the code block page is the mentor (Tom), after that, any other client will be counted as a student.
-
-- Clean, intuitive interface displaying available coding challengesIf Tom leaves the code-block page, students should be redirected to the lobby page, and any written code should be deleted.
-
-- Dynamic code block selection with instant navigationThe mentor will see the selected code block in a read-only mode.
-
-- Responsive design for seamless user experienceThe student will see the code block with the ability to change the code
-
-Code changes should be displayed in real-time (Socket)
-
-### 👨‍🏫 **Mentor/Student Role Management**The code should have syntax highlighting
-
-- **Automatic Role Assignment**: First user becomes mentor, subsequent users are studentsAt any given time, each user can see how many students are in the room
-
-- **Mentor Controls**: Read-only view with session oversight capabilitiesHave a “solution” on a codeblock object (also insert manually), once the student changes the code to be equal to the solution, show a big smiley face on the screen :)
-
+### **Mentor/Student Role Management**
+- **Automatic Role Assignment**: First user becomes mentor, subsequent users are students
+- **Mentor Controls**: Read-only view with session oversight capabilities
 - **Student Interaction**: Full editing capabilities with real-time collaboration
 - **Session Management**: Automatic student redirect when mentor leaves
 
-### ⚡ **Real-Time Collaboration**
-
+### **Real-Time Collaboration**
 - **Live Code Synchronization**: Instant code sharing using Socket.IO
 - **Multi-User Support**: Track and display active student count
 - **Session Persistence**: Maintains code state throughout the session
 - **Automatic Cleanup**: Clears session data when mentor disconnects
 
-### 🎯 **Smart Solution Validation**
-
+### **Smart Solution Validation**
 - **Automatic Code Checking**: Real-time comparison with predefined solutions
-- **Instant Feedback**: Visual success indicators with emoji celebrations
+- **Instant Feedback**: Visual success indicators with celebrations
 - **Flexible Matching**: Normalized code comparison ignoring formatting differences
 - **Multiple Exercise Types**: Support for various JavaScript concepts
 
-### 💻 **Advanced Code Editor**
-
+### **Advanced Code Editor**
 - **Syntax Highlighting**: Professional JavaScript syntax highlighting
 - **VS Code Theme**: Familiar dark theme for comfortable coding
 - **Code Intelligence**: Bracket matching, auto-completion, and proper indentation
 - **Responsive Design**: Optimized for various screen sizes
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### **Backend**
-
 - **Node.js** - Server runtime environment
 - **Express.js** - Web application framework
 - **Socket.IO** - Real-time bidirectional communication
@@ -68,7 +48,6 @@ Code changes should be displayed in real-time (Socket)
 - **CORS** - Cross-origin resource sharing
 
 ### **Frontend**
-
 - **React 18** - Modern UI library with hooks
 - **Vite** - Fast build tool and development server
 - **React Router** - Client-side routing
@@ -76,39 +55,55 @@ Code changes should be displayed in real-time (Socket)
 - **Socket.IO Client** - Real-time client communication
 
 ### **Development Tools**
-
 - **ESLint** - Code linting and quality assurance
 - **Nodemon** - Development server auto-restart
 - **dotenv** - Environment configuration management
 
-## 🏗️ Architecture
+## Configuration
+
+### **Local-First Setup**
+This application is configured for local development and runs entirely on your machine:
+
+- **Backend Server**: Fixed on `localhost:3001`
+- **Database**: Local MongoDB instance at `mongodb://localhost:27017/codeblocks`
+- **Frontend Dev Server**: Runs on `localhost:5173` with proxy to backend
+- **No Environment Variables Required**: All configurations are set for local development
+
+### **Key Features**
+- No cloud dependencies required
+- Consistent port configuration (3001)
+- Local MongoDB integration
+- Hot reload for development
+- Real-time WebSocket communication
+
+## Architecture
 
 ```
-├── 🖥️  Backend (Node.js/Express)
+├── Backend (Node.js/Express)
 │   ├── REST API endpoints for code blocks
 │   ├── Socket.IO real-time communication
 │   ├── MongoDB data persistence
 │   └── Session and room management
 │
-├── 🌐 Frontend (React/Vite)
+├── Frontend (React/Vite)
 │   ├── Lobby component for code block selection
 │   ├── CodeBlockPage with real-time editor
 │   ├── Role-based UI rendering
 │   └── Socket integration for live updates
 │
-└── 🔄 Real-Time Features
+└── Real-Time Features
     ├── Live code synchronization
     ├── User presence tracking
     ├── Automatic solution validation
     └── Session management
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- MongoDB (local installation or MongoDB Atlas)
+- MongoDB (local installation required)
 - npm or yarn package manager
 
 ### Installation
@@ -134,12 +129,15 @@ Code changes should be displayed in real-time (Socket)
    cd ..
    ```
 
-4. **Environment Setup**
-   Create a `.env` file in the root directory:
+4. **Start MongoDB locally**
+   Make sure MongoDB is running on your local machine:
 
-   ```env
-   MONGO_URL=mongodb://localhost:27017/codeblocks
-   PORT=5000
+   ```bash
+   # On macOS with Homebrew
+   brew services start mongodb-community
+   
+   # Or start manually
+   mongod
    ```
 
 5. **Build the frontend**
@@ -153,17 +151,36 @@ Code changes should be displayed in real-time (Socket)
 6. **Start the application**
 
    ```bash
-   # Development mode with auto-restart
-   npm run dev
-
    # Production mode
    npm start
+   
+   # Development mode with auto-restart
+   npm run dev
    ```
 
 7. **Access the application**
-   Open your browser and navigate to `http://localhost:5000`
+   Open your browser and navigate to `http://localhost:3001`
 
-## 📋 Available Code Challenges
+### **Development Mode**
+
+For development with hot reload on the frontend:
+
+1. **Start the backend** (in one terminal):
+   ```bash
+   npm start
+   ```
+
+2. **Start the frontend dev server** (in another terminal):
+   ```bash
+   cd client
+   npm run dev
+   ```
+
+3. **Access the development version** at `http://localhost:5173`
+   - Frontend development server with hot reload
+   - Automatically proxies API calls to backend at port 3001
+
+## Available Code Challenges
 
 The platform comes pre-loaded with JavaScript exercises:
 
@@ -172,7 +189,7 @@ The platform comes pre-loaded with JavaScript exercises:
 3. **DOM Manipulation** - Element selection and styling
 4. **Promise Chains** - Sequential asynchronous operations
 
-## 🎮 How to Use
+## How to Use
 
 1. **Start a Session**: Navigate to the lobby and select a code challenge
 2. **Mentor Role**: First user gets read-only mentor view with session control
@@ -181,7 +198,7 @@ The platform comes pre-loaded with JavaScript exercises:
 5. **Solution Validation**: Receive immediate feedback when code matches the solution
 6. **Session End**: Students are automatically redirected when mentor leaves
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - User authentication and session persistence
 - Video/audio communication integration
@@ -190,4 +207,17 @@ The platform comes pre-loaded with JavaScript exercises:
 - Session recording and playback
 - Advanced mentor tools and analytics
 
+## Developer
+
+**Yoav Silber**
+- Experienced full-stack developer
+- Passionate about educational technology
+- Skilled in real-time web applications and collaborative tools
+
+## License
+
+This project is available for educational and portfolio purposes.
+
 ---
+
+*Built with care for the programming education community*
